@@ -18,7 +18,7 @@
 
               <div class="form-group">
                 <label for="fecha">Fecha</label>
-                <input type="date" class="form-control" id="fecha" name="fecha">
+                <input type="date" class="form-control" id="fecha" name="date">
               </div>
               <div class="form-group">
                 <label for="application">Aplicación</label><br>

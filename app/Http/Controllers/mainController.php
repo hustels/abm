@@ -43,10 +43,13 @@ class mainController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(StoreReportRequest $request)
+	public function store(Requests\StoreReportRequest $request)//StoreReportRequest $request
 	{
-		Report::create($request->all);
-		return redirect('pages.home');
+		Report::create(Request::all());
+		//return redirect('pages.home');
+		return Request::all();
+	
+
 	}
 
 	/**

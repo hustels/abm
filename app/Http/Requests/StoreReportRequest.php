@@ -11,7 +11,8 @@ class StoreReportRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true; // Si esta en false no se podra crear 
+					//un registro en la bd por ejemplo jhon no puede editar algo creado por alex
 	}
 
 	/**
@@ -22,7 +23,8 @@ class StoreReportRequest extends Request {
 	public function rules()
 	{
 		return [
-			'sm_num' => 'required|min:5'
+			'sm_num' => 'required|min:5',
+			'employer_id' => 'required'
 		];
 	}
 
