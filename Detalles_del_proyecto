@@ -1,0 +1,31 @@
+
+/* Creando la table 'reports'
+php artisan make:migration create_reports_table --create=reports
+
+/* Campos de la table 'reports'
+- id
+- sm_number
+- link
+-  date
+- employer_id
+- group
+- application
+
+
+/* Scripts de php y class */
+- App/helpers.php  contiene el metodo flash
+
+/* Lista de aplications
+App/Http\Utilities/Application
+$r = new App\Report;
+
+$r->sm_num = 'IM000000468985';
+$r->link = 'www.dti.soporte.com';
+$r->date = Carbon\Carbon::now();
+$r->employer_id= 'ES0056555';
+$r->group = 'Citrix';
+$r->application = 'Citrix';
+$r->created_at = Carbon\Carbon::now();
+$r->updated_at = Carbon\Carbon::now();
+
+$r->save();
