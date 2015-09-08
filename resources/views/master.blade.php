@@ -8,6 +8,7 @@
 
 </head>
 <body role="document">
+
 <div class="container">
 	@yield('header')
 	    <!-- Comienzo navbar-->
@@ -64,6 +65,11 @@
 	
 	<!-- Javascript personalizado  -->
 	<script src="/js/main.js"></script>
+
+	<!-- Cargar arhivo sweetalert css y sweetalert.js -->
+	<script src="/sweetalert-master/dist/sweetalert.min.js"></script> 
+	<link rel="stylesheet" type="text/css" href="/sweetalert-master/dist/sweetalert.css">
+	@include('flash')
 
 	@yield('footer')
 		<footer class="footer">

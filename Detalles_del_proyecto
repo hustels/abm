@@ -29,3 +29,12 @@ $r->created_at = Carbon\Carbon::now();
 $r->updated_at = Carbon\Carbon::now();
 
 $r->save();
+
+
+
+// Flash messaging system
+1- En el archivo de composer.json autocargamos el array
+ "files":[
+ "App/Helpers.php"
+ ]
+

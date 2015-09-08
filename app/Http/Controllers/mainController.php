@@ -6,6 +6,7 @@ use App\Report;
 //use Illuminate\Http\Request;
 use App\Http\Requests\StoreReportRequest;
 use Request;
+use App\Http;
 
 class mainController extends Controller {
 
@@ -34,6 +35,7 @@ class mainController extends Controller {
 	 */
 	public function create()
 	{
+		//flash('Hello world' , 'Lo que sea');
 		return view('pages.create');
 		
 	}
@@ -47,7 +49,9 @@ class mainController extends Controller {
 	{
 		Report::create($request->all());
 		//return redirect('pages.home');
-		return Request::all();
+		flash('Usuario guardado correctamente');
+		//return Request::all();
+		return redirect()->back();// es temporal
 	
 
 	}
