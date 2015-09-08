@@ -31,4 +31,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+	// Un usuario puede crear muchos reports relationship
+	public function reports(){
+		return $this->hasMany("App\Report");
+	}
+
 }

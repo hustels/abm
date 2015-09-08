@@ -15,4 +15,10 @@ class Report extends Model {
 		'created_at',
 		'updated_at'
 	];
+
+
+	// Un report es creado por un usuario relationship
+	public function creator(){
+		return $this->belongsTo("App\User");
+	}
 }
