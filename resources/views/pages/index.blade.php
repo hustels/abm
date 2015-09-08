@@ -14,7 +14,9 @@
 				  {{$report->group}}-
 				  {{$report->application}}-
 				  {{$report->created_at}}-
-				  {{$report->updated_at}}-
+				  {{$report->updated_at}}- 
+				  <a href="/reports/destroy/{{$report->id}}" class="btn btn-danger">Borrar</a>
+				  <button class="btn btn-success">Editar</button>
 				</li>
 			</ul>
 			<!--  -->

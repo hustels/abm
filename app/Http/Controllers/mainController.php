@@ -23,7 +23,7 @@ class mainController extends Controller {
 	{
 		$this->middleware('auth');
 		// Extraer todos reports de BD y pasarlo a la vista
-		$reports =Report::all();
+		$reports =Report::latest()->get(); // Ordenar por el ultimo
 		return view('pages.index'  , compact('reports'));
 	}
 
@@ -45,7 +45,7 @@ class mainController extends Controller {
 	 */
 	public function store(Requests\StoreReportRequest $request)//StoreReportRequest $request
 	{
-		Report::create(Request::all());
+		Report::create($request->all());
 		//return redirect('pages.home');
 		return Request::all();
 	
@@ -93,7 +93,14 @@ class mainController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$report = Report::find($id);
+		if($report){
+			// Si hay report con ese id
+			return $report;
+		}else {
+			return 'No report founded';
+		}
+		
 	}
 
 }

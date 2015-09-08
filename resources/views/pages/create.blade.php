@@ -18,7 +18,7 @@
 
               <div class="form-group">
                 <label for="fecha">Fecha</label>
-                <input type="date" class="form-control" id="fecha" name="date">
+                <input type="date" class="form-control" id="fecha" name="date" >
               </div>
               <div class="form-group">
                 <label for="application">Aplicación</label><br>
@@ -41,7 +41,13 @@
      
             <input type="submit" class="btn btn-primary btn-lg" value="Añadir registro">
         </form>
-		{{var_dump($errors)}}
+		    @if($errors->any())
+          <ul class="alert alert-danger">
+              @foreach ($errors->all() as $error)
+                <li>{{ $error}}</li>
+              @endforeach
+          </ul>
+        @endif
 	</div>
 
 @stop

@@ -14,7 +14,7 @@ Route::get('/',["middleware" =>"auth" , "uses" => 'mainController@home']);
 Route::get('reports',['middleware' => 'auth', 'uses' =>  'mainController@index']);// si esta autenticado no puede acceder
 Route::get('reports/create', ["middleware" => "auth" , "uses" => 'mainController@create']);// si esta autenticado no puede acceder
 Route::post('reports/store', 'mainController@store');
-
+Route::get('reports/destroy/{id}' , 'mainController@destroy');
 
 Route::get('home', 'HomeController@index');
 
