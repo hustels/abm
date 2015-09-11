@@ -1,8 +1,8 @@
-@extends('master')
+@extends('layout')
 
 @section('content')
 
-	<div class="container">
+	
 	<br><br>
 		<h1>Crear nuevo reporte</h1>
 		<form method="post" action="/reports/store">
@@ -48,7 +48,6 @@
               @endforeach
           </ul>
         @endif
-	</div>
 
 
 

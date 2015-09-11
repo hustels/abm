@@ -72,7 +72,7 @@
 	@include('flash')
 
 	@yield('footer')
-		<footer class="footer">
+		<footer class="footer" id="page_footer">
         <p>&copy; Prosegur 2015 | Altas bajas modificaciones</p>
      	 </footer>
     </div>
