@@ -53,6 +53,7 @@
                 <!-- /.dropdown -->
       
                 <!-- /.dropdown -->
+ 
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -156,7 +157,11 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div id="morris-area-chart"></div>
+                            <div id="morris-area-chart">
+                                @yield('content')
+                                    <!-- Cuando se cargue la vista create se situara el formulario aqui -->
+                                @show
+                            </div>
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -287,6 +292,9 @@
 
     <!-- Bootstrap JS -->
     <script src="/libs/bootstrap/js/bootstrap.js"></script>
+    <!-- Cargar arhivo sweetalert css y sweetalert.js -->
+    <script src="/sweetalert-master/dist/sweetalert.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="/sweetalert-master/dist/sweetalert.css">
 </body>
 
 </html>
