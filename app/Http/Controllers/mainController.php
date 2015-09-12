@@ -20,10 +20,11 @@ class mainController extends Controller {
 	public function home(Peticion $request)
 	{
 		$usuario_autenticado = $request->user();
-		$report  = Report::all();
-		//$r->lists('date');
+		$reports  = Report::all(); 
+		$report = $reports->lists("date");
+		//dd($reports);
+		return  view('pages.home' , compact('usuario_autenticado' , 'report') );
 		
-		return  view('pages.home' , compact('usuario_autenticado'));
 	}
 	public function index()
 	{
