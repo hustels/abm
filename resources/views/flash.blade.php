@@ -4,7 +4,7 @@
 		title: "success", 
 		text: "{{session('flash_message')}}",
 		type: "success",  
-		timer: 1600, 
+		timer: 1900, 
 		showConfirmButton: false
 		});
 </script>

@@ -17,7 +17,7 @@ class CreateReportsTable extends Migration {
 			$table->increments('id');
 			$table->string('sm_num');
 			$table->string('link');
-			$table->string('date');
+			$table->date('date');
 			$table->string('employer_id');
 			$table->text('group');
 			$table->string('application');

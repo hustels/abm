@@ -53,7 +53,9 @@
                 <!-- /.dropdown -->
       
                 <!-- /.dropdown -->
- 
+                <a href="/reports/create"  class="glyphicon glyphicon-plus"></a> &nbsp;
+                <a href=""  class="glyphicon glyphicon-remove"></a> &nbsp;
+                
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
@@ -82,7 +84,7 @@
                         <li class="divider"></li>
                         <li>
                             <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
+                                <strong>Todas las alertas</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </li>
@@ -100,7 +102,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="/auth/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -114,7 +116,7 @@
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" class="form-control" placeholder="Buscar...">
                                 <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
@@ -124,7 +126,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i>Inicio</a>
+                            <a href="/"><i class="fa fa-dashboard fa-fw"></i>Inicio</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Reporte<span class="fa arrow"></span></a>
@@ -179,19 +181,19 @@
                         <div class="panel-body">
                             <div class="list-group">
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                    <i class="fa fa-comment fa-fw"></i> Nuevo comentario
+                                    <span class="pull-right text-muted small"><em>Hace 23 minutos</em>
                                     </span>
                                 </a>
 
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
+                                <!--<a href="#" class="list-group-item">
+                                    <i class="fa fa-envelope fa-fw"></i> Mensajes enviados
+                                    <span class="pull-right text-muted small"><em>Hace 23 minutos</em>
                                     </span>
-                                </a>
+                                </a> -->
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                    <i class="fa fa-tasks fa-fw"></i> Nueva tarea
+                                    <span class="pull-right text-muted small"><em>Hace 23 minutos</em>
                                     </span>
                                 </a>
                             </div>
@@ -212,29 +214,22 @@
                                 </button>
                                 <ul class="dropdown-menu slidedown">
                                     <li>
+
+                                    </li>
+                                    <li>
                                         <a href="#">
-                                            <i class="fa fa-refresh fa-fw"></i> Refresh
+                                            <i class="fa fa-check-circle fa-fw"></i> Disponible
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-check-circle fa-fw"></i> Available
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-times fa-fw"></i> Busy
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o fa-fw"></i> Away
+                                            <i class="fa fa-times fa-fw"></i> Ocupado
                                         </a>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-sign-out fa-fw"></i> Sign Out
+                                            <i class="fa fa-sign-out fa-fw"></i> Desconectar
                                         </a>
                                     </li>
                                 </ul>
@@ -249,9 +244,9 @@
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
-                                            <strong class="primary-font">Jack Sparrow</strong>
+                                            <strong class="primary-font">Cheikh Ndiaye</strong>
                                             <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
+                                                <i class="fa fa-clock-o fa-fw"></i> Hace 10 minutos
                                             </small>
                                         </div>
                                         <p>
@@ -266,7 +261,7 @@
                         <!-- /.panel-body -->
                         <div class="panel-footer">
                             <div class="input-group">
-                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Escribir mensaje..." />
                                 <span class="input-group-btn">
                                     <button class="btn btn-warning btn-sm" id="btn-chat">
                                         Enviar
@@ -292,9 +287,12 @@
 
     <!-- Bootstrap JS -->
     <script src="/libs/bootstrap/js/bootstrap.js"></script>
+
     <!-- Cargar arhivo sweetalert css y sweetalert.js -->
     <script src="/sweetalert-master/dist/sweetalert.min.js"></script> 
     <link rel="stylesheet" type="text/css" href="/sweetalert-master/dist/sweetalert.css">
+     @include('flash')
+     
 </body>
 
 </html>

@@ -7,6 +7,7 @@ use App\Report;
 use App\Http\Requests\StoreReportRequest;
 use Request;
 use App\Http;
+use Illuminate\Http\Request as Peticion;
 
 class mainController extends Controller {
 
@@ -16,9 +17,13 @@ class mainController extends Controller {
 	 * @return Response
 	 */
 
-	public function home()
+	public function home(Peticion $request)
 	{
-		return  view('pages.home');
+		$usuario_autenticado = $request->user();
+		$report  = Report::all();
+		//$r->lists('date');
+		
+		return  view('pages.home' , compact('usuario_autenticado'));
 	}
 	public function index()
 	{
@@ -49,9 +54,13 @@ class mainController extends Controller {
 	{
 		Report::create($request->all());
 		//return redirect('pages.home');
-		flash('Usuario guardado correctamente');
+		
 		//return Request::all();
+		flash('Usuario guardado correctamente');
 		return redirect()->back();// es temporal
+		 
+		
+
 	
 
 	}
