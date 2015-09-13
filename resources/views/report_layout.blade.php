@@ -10,8 +10,7 @@
     <meta name="author" content="">
 
     <title>Pagina de administración abm</title>
-    <!-- Datatables CSS -->
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+   
 
    <!-- Boostrap css -->
     <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.css">
@@ -161,11 +160,10 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div id="morris-area-chart">
                                 @yield('content')
                                     <!-- Cuando se cargue la vista create se situara el formulario aqui -->
                                 @show
-                            </div>
+                         
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -183,7 +181,7 @@
     <!-- /#wrapper -->
 
     <!-- Jquery  -->
-    @yield('datatables')
+   
     <script src="/libs/jquery/jquery-1.11.3.js"></script>
     <!-- Datatables js -->
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
