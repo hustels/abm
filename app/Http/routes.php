@@ -26,3 +26,7 @@ Route::controllers([
 
 
 
+Route::controller('reports/altas', 'mainController', [
+    'anyData'  => 'datatables.data',
+    'getIndex' => 'datatables',
+]);

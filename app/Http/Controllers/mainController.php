@@ -8,6 +8,7 @@ use App\Http\Requests\StoreReportRequest;
 use Request;
 use App\Http;
 use Illuminate\Http\Request as Peticion;
+use yajra\Datatables\Datatables;
 
 class mainController extends Controller {
 
@@ -26,13 +27,20 @@ class mainController extends Controller {
 		return  view('pages.home' , compact('usuario_autenticado' , 'report') );
 		
 	}
-	public function index()
-	{
-		$this->middleware('auth');
-		// Extraer todos reports de BD y pasarlo a la vista
-		$reports =Report::latest()->get(); // Ordenar por el ultimo
-		return view('pages.index'  , compact('reports'));
-	}
+	public function getIndex()
+    {
+        return view('pages.index');
+    }
+
+    /**
+     * Procesar peticion ajax de Datatables
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function anyData()
+    {
+        return Datatables::of(Report::select('*'))->make(true);
+    }
 
 	/**
 	 * Show the form for creating a new resource.
