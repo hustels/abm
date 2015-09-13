@@ -10,7 +10,8 @@
     <meta name="author" content="">
 
     <title>Pagina de administración abm</title>
-   
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 
    <!-- Boostrap css -->
     <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.css">
