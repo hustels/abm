@@ -1,4 +1,5 @@
 <?php
+use App\Events\UserHasRegistred;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,20 @@ Route::controller('reports/altas', 'mainController', [
     'anyData'  => 'datatables.data',
     'getIndex' => 'datatables',
 ]);
+
+
+// Donde vemos si broadcast es exitoso
+get('/difusion' , function(){
+	// vista donde mostrar los mensajes
+	return view('pages.events');
+});
+
+// Difundir
+get('difundir'  , function(){
+	//Creamos el evento a difundir
+	event(new UserHasRegistred('Cheikh Ndiaye'));
+});
+
+
+
+
