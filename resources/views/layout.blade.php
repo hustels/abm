@@ -21,6 +21,8 @@
 
     <!-- Custom Fonts -->
     <link href="/font-awesome/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Cargar archivo socketjs -->
+    <script type="text/javascript" src="/js/socket.io.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -66,7 +68,8 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    <i class="fa fa-comment fa-fw"></i> Nuevo comentario
+                                    <i class="fa fa-comment fa-fw"></i>
+                                    
                                     <span class="pull-right text-muted small">Hace 4 minutos</span>
                                 </div>
                             </a>
@@ -99,7 +102,13 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        
+                         @if (Auth::user())
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i>
+                            {{Auth::user()->name}}
+                            </a>
+                            
+                        @endif
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
@@ -146,7 +155,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Bienvenido Usuario</h1>
+                    <h1 class="page-header">Reportes</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -157,7 +166,7 @@
                 <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Ejemplo
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Grafica de reportes
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -183,7 +192,7 @@
                         <div class="panel-body">
                             <div class="list-group">
                                 <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> Nuevo comentario
+                                    <i class="fa fa-comment fa-fw"></i> <p id="evento"></p>
                                     <span class="pull-right text-muted small"><em>Hace 23 minutos</em>
                                     </span>
                                 </a>
@@ -282,6 +291,8 @@
         <!-- /#page-wrapper -->
 
     </div>
+
+ 
     <!-- /#wrapper -->
 
     <!-- Jquery  -->
@@ -296,6 +307,22 @@
     <script src="/sweetalert-master/dist/sweetalert.min.js"></script> 
     <link rel="stylesheet" type="text/css" href="/sweetalert-master/dist/sweetalert.css">
      @include('flash')
+
+
+
+     <script type="text/javascript">
+    $(document).ready(function(){
+
+            //La parte de cliente de socket.io
+            var socket = io('http://localhost:3000');
+            socket.on("user_create_report_chanel:App\\Events\\UserCreateReport", function(message){
+                 console.log(message.data);
+                  $( "#evento" ).append(message.data);
+                  $( "#evento" ).append('<br>');
+             });
+
+        });
+    </script>
      
 </body>
 

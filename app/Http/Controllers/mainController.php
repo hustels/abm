@@ -21,18 +21,17 @@ class mainController extends Controller {
 
 	public function home(Peticion $request)
 	{
-		// Crear un event
-		event (new UserCreateReport('message to brodcast'));
 		$usuario_autenticado = $request->user();
 		$reports  = Report::all(); 
 		$report = $reports->lists("date");
-		return 'done';
 		//dd($reports);
-		//return  view('pages.home' , compact('usuario_autenticado' , 'report') );
+		return  view('pages.home' , compact('usuario_autenticado' , 'report') );
 		
 	}
 	public function index() //  el method se llamaba getIndex
     {
+    	// Crear un event
+		event (new UserCreateReport('message to brodcast'));
         return view('pages.index');
     }
 

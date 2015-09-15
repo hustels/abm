@@ -4,9 +4,12 @@
 @section('content')
 
 <script type="text/javascript" src="/chartjs/Chart.js"></script>
+
   <br><br>
-		<h1>Welcome {{$usuario_autenticado->name }}</h1>
+		<h4>Reporte mensual</h4>
 	<canvas id="myChart" width="500" height="400"></canvas>
+
+
 	<script type="text/javascript">
 	
 	(function(){
