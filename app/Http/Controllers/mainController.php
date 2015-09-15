@@ -9,6 +9,7 @@ use Request;
 use App\Http;
 use Illuminate\Http\Request as Peticion;
 use yajra\Datatables\Datatables;
+use App\Events\UserCreateReport;
 
 class mainController extends Controller {
 
@@ -20,14 +21,17 @@ class mainController extends Controller {
 
 	public function home(Peticion $request)
 	{
+		// Crear un event
+		event (new UserCreateReport('message to brodcast'));
 		$usuario_autenticado = $request->user();
 		$reports  = Report::all(); 
 		$report = $reports->lists("date");
+		return 'done';
 		//dd($reports);
-		return  view('pages.home' , compact('usuario_autenticado' , 'report') );
+		//return  view('pages.home' , compact('usuario_autenticado' , 'report') );
 		
 	}
-	public function getIndex()
+	public function index() //  el method se llamaba getIndex
     {
         return view('pages.index');
     }

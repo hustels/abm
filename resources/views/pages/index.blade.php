@@ -7,6 +7,7 @@
 <script src="/libs/jquery/jquery-1.11.3.js"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/TableTools/js/dataTables.tableTools.min.js"></script>
+<script type="text/javascript" src="/js/socket.io.js"></script>
 
 	
 	<br><br>
@@ -24,6 +25,13 @@
             </tr>
         </thead>
     </table>
+      <script>
+      		//La parte de cliente de socket.io
+		    var socket = io('http://localhost:3000');
+		    socket.on("user_create_report_chanel:App\\Events\\UserCreateReport", function(message){
+		         console.log(message);
+		     });
+    </script>
 
 
     <script>

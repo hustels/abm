@@ -38,3 +38,31 @@ $r->save();
  "App/Helpers.php"
  ]
 
+
+
+// Websockets
+
+Como trabjar con websockets
+
+1 - Creamos ruta de defusion donde queremos que ocurra
+2 - ruta que realmente difunde
+3 modificamos app\providers\EventServiceProvider lo dejamos la siguiente forma
+protected $listen = [
+		'event.name' => [
+			'EventListener',
+		],
+		'App\Events\UserHasRegistred' =>[
+			'App\Listeners\Email@metodo_a_ejecutar' // si queremos usar sigle listener y multiple events , es el metodo de la funcion del listener creado
+		],
+	];
+
+3 - ejecutamos el comando php artisan event:generate los ficheros generados estan app\Events y app\Listeners
+
+
+3 - install pusher composer require pusher/pusher-php-server
+
+
+
+// websockets con redis node express y laravel 
+http://blog.nedex.io/laravel-5-1-broadcasting-events-using-redis-driver-socket-io/
+
