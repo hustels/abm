@@ -17,11 +17,13 @@ class CreateReportsTable extends Migration {
 			$table->increments('id');
 			$table->string('sm_num');
 			$table->string('link');
-			$table->date('date');
 			$table->string('employer_id');
 			$table->text('group');
 			$table->string('application');
-			$table->timestamps();
+			$table->timestamp('created_at')
+            ->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')
+            ->default(DB::raw('CURRENT_TIMESTAMP'));
 		});
 	}
 

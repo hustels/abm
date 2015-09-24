@@ -22,3 +22,16 @@
 	margin-top: 10%;
 }
 
+#notification-panel{
+	min-height: 100%;
+}
+#notifications-list{
+	min-height: 8em;
+	
+}
+
+#tasks-list{
+	background: blue;
+	min-height: 15em;
+}
+

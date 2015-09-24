@@ -10,7 +10,7 @@ use App\Http;
 use Illuminate\Http\Request as Peticion;
 use yajra\Datatables\Datatables;
 use App\Events\UserCreateReport;
-
+use Auth;
 class mainController extends Controller {
 
 	/**
@@ -22,17 +22,25 @@ class mainController extends Controller {
 	public function home(Peticion $request)
 	{
 		$usuario_autenticado = $request->user();
-		$reports  = Report::all(); 
-		$report = $reports->lists("date");
-		//dd($reports);
-		return  view('pages.home' , compact('usuario_autenticado' , 'report') );
+		//$reports  = Report::all(); 
+		$reports = \DB::table('reports')
+                ->orderBy('created_at', 'desc')
+                ->get();
+		//$report = $reports->lists("created_at");
+          $report = [2015 , 2016,2017];
+
+		return  view('pages.home' , compact('usuario_autenticado' , 'data' , 'reports') );
+
 		
 	}
 	public function index() //  el method se llamaba getIndex
     {
-    	// Crear un event
-		event (new UserCreateReport('message to brodcast'));
+    	
+    	// Crear un event and pass data to UserCreateReport event
+		
+		
         return view('pages.index');
+        
     }
 
     /**
@@ -53,6 +61,7 @@ class mainController extends Controller {
 	public function create()
 	{
 		//flash('Hello world' , 'Lo que sea');
+		
 		return view('pages.create');
 		
 	}
@@ -64,12 +73,20 @@ class mainController extends Controller {
 	 */
 	public function store(Requests\StoreReportRequest $request)//StoreReportRequest $request
 	{
-		Report::create($request->all());
-		//return redirect('pages.home');
 		
+		if(Report::create($request->all())){
+			//return redirect('pages.home');
+			$data  = $request->all();
+    	
+		event (new UserCreateReport($data));
 		//return Request::all();
 		flash('Usuario guardado correctamente');
+
 		return redirect()->back();// es temporal
+
+		//return view('pages.home' , compact('reports' , 'data'));
+		}
+		
 		 
 		
 
@@ -85,7 +102,9 @@ class mainController extends Controller {
 	 */
 	public function show($id)
 	{
-		
+		$report = Report::findOrFail($id);
+		//dd($report->created_at->addDays(0.5)->diffForHumans());
+		dd($report->created_at->date());
 	}
 
 	/**

@@ -21,8 +21,9 @@
 
     <!-- Custom Fonts -->
     <link href="/font-awesome/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
     <!-- Cargar archivo socketjs -->
-    <script type="text/javascript" src="/js/socket.io.js"></script>
+   
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -184,17 +185,21 @@
                 </div>
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
-                    <div class="panel panel-default">
+
+                    <div class="panel panel-default"> beginnotification
+
                         <div class="panel-heading">
                             <i class="fa fa-bell fa-fw"></i> Notifications Panel
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> <p id="evento"></p>
-                                    <span class="pull-right text-muted small"><em>Hace 23 minutos</em>
+                        <div class="panel-body" id="notification-panel">
+                            <div class="list-group" >
+                                <a href="#" class="list-group-item" id="notifications-list">
+                                    <i class="fa fa-comment fa-fw"></i> 
+                                    <span class="pull-right text-muted small">
                                     </span>
+                                    @yield('notification')
+                                    <p id="evento"></p><em>Hace 23 minutos</em>
                                 </a>
 
                                 <!--<a href="#" class="list-group-item">
@@ -202,7 +207,7 @@
                                     <span class="pull-right text-muted small"><em>Hace 23 minutos</em>
                                     </span>
                                 </a> -->
-                                <a href="#" class="list-group-item">
+                                <a href="#" class="list-group-item" id="tasks-list">
                                     <i class="fa fa-tasks fa-fw"></i> Nueva tarea
                                     <span class="pull-right text-muted small"><em>Hace 23 minutos</em>
                                     </span>
@@ -211,11 +216,10 @@
                         
                         </div>
                         <!-- /.panel-body -->
-                    </div>
+                    </div> -->endnotification
                     <!-- /.panel -->
 
-                    <!-- /.panel -->
-                    <div class="chat-panel panel panel-default">
+                    <!--<div class="chat-panel panel panel-default"> beginchat 
                         <div class="panel-heading">
                             <i class="fa fa-comments fa-fw"></i>
                             Chat
@@ -246,7 +250,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <!-- /.panel-heading -->
+                       
                         <div class="panel-body">
                             <ul class="chat">
                                 <li class="left clearfix">
@@ -269,7 +273,7 @@
 
                             </ul>
                         </div>
-                        <!-- /.panel-body -->
+                        
                         <div class="panel-footer">
                             <div class="input-group">
                                 <input id="btn-input" type="text" class="form-control input-sm" placeholder="Escribir mensaje..." />
@@ -280,9 +284,9 @@
                                 </span>
                             </div>
                         </div>
-                        <!-- /.panel-footer -->
-                    </div>
-                    <!-- /.panel .chat-panel -->
+                        
+                    </div> // endcaht -->
+                    
                 </div>
                 <!-- /.col-lg-4 -->
             </div>
@@ -313,13 +317,6 @@
      <script type="text/javascript">
     $(document).ready(function(){
 
-            //La parte de cliente de socket.io
-            var socket = io('http://localhost:3000');
-            socket.on("user_create_report_chanel:App\\Events\\UserCreateReport", function(message){
-                 console.log(message.data);
-                  $( "#evento" ).append(message.data);
-                  $( "#evento" ).append('<br>');
-             });
 
         });
     </script>

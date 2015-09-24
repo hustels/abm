@@ -66,3 +66,239 @@ protected $listen = [
 // websockets con redis node express y laravel 
 http://blog.nedex.io/laravel-5-1-broadcasting-events-using-redis-driver-socket-io/
 
+
+
+
+// con html5 quizas
+PUSH NOTIFICATIONS TO THE BROWSER WITH SERVER SENT EVENTS
+
+
+
+
+
+
+
+
+
+
+
+Installation
+
+There are some few things we need to install first, kindly skip if your system already have the features below
+
+1. Redis
+
+http://redis.io/ and follow the instructions to download and install.
+
+2. Node.js
+
+https://nodejs.org/ and click install
+
+The items below needed to be installed at your root directory of your Laravel 5.1 app. Navigate there to run the commands below
+
+Navigate to your application’s root directory and type the following commands:
+
+3. Socket.io  More info
+npm install socket.io
+
+4. Express
+npm install express
+
+5. ioredis  More info
+npm install ioredis
+
+6. Predis  More info
+Required by Laravel to run Redis
+composer require predis/predis
+
+Create your Event
+
+Now, its some 5.1 time. Navigate to your Laravel app root directory, run the command below
+php artisan make:event MyEventNameHere
+
+Okay after it says successful, head over to App/Events/MyEventNameHere
+
+<?php namespace App\Events;
+
+use App\Events\Event;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+class MyEventNameHere extends Event
+{
+    use SerializesModels;
+
+    /**
+     * Create a new event instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Get the channels the event should be broadcast on.
+     *
+     * @return array
+     */
+    public function broadcastOn()
+    {
+        return [];
+    }
+}
+Now we implement the new ShouldBroadcast
+class MyEventNameHere extends Event implements ShouldBroadcast
+
+This will tell Laravel that this event should be broadcasted to client-side when it is fired.
+
+Now how do we get data across, easy, as explained by Taylor Otwell in his Laracasts video, any public variables declared will be serialized and send over while private variables will not be serialized.
+
+So now I have added a public variable and changed the broadcastOn method to return the channels I want this event to broadcast on. I will name it test-channel
+
+class MyEventNameHere extends Event implements ShouldBroadcast
+{
+    use SerializesModels;
+
+    public $data;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->data = array(
+            'power'=> '10'
+        );
+    }
+
+    /**
+     * Get the channels the event should be broadcast on.
+     *
+     * @return array
+     */
+    public function broadcastOn()
+    {
+        return ['test-channel'];
+    }
+}
+Routes
+
+We will be creating a route where by on load, it will fire the event, thus updating all of the client browsers with new data. In which my example above is to send a data with power 10.
+Go to App/Http/routes.php
+
+Add in
+
+Route::get('test', function () {
+    event(new App\Events\MyEventNameHere());
+    return "event fired";
+});
+So, everytime we visit http://localhost/myapp/public/test , it will fire the event, thus broadcasting to all clients who are listening.
+
+Coding NodeJS Socket.io Server
+
+Now, we need to get a Socket.io server up so it can emit and listen for new messages.
+
+Add this to your laravel 5.1 app root directory, name it as socket.js
+
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var Redis = require('ioredis');
+var redis = new Redis();
+
+redis.subscribe('test-channel', function(err, count) {
+
+});
+
+redis.on('message', function(channel, message) {
+   console.log('Message Recieved: ' + message);
+
+    message = JSON.parse(message);
+
+    io.emit(channel + ':' + message.event, message.data);
+
+});
+
+http.listen(3000, function(){
+    console.log('Listening on Port 3000');
+});
+As you can see from the above code, we are requring all the modules we just installed above, and made a simple server on port 3000.
+
+Start up Redis
+
+Make sure you have installed Redis and predis properly. Now open up your console/terminal navigate to the your redis folder.
+
+cd src
+Then,
+cd ./redis-server
+
+You can now see Redis server is up and running
+
+Optional: If you have brew you can install redis easily by running this command
+brew install redis
+Then, to start the server
+redis-server
+
+Config Broadcast Driver
+
+Go back to your Laravel app, head to config/broadcasting.php, now change the driver to Redis
+
+'default' => env('BROADCAST_DRIVER', 'redis'),
+
+Start up Socket.io server
+
+At your root directory of your Laravel app, run
+node socket.js
+
+You will see
+Listening on Port 3000
+If not, something must be wrong, double check your installations.
+
+Socket.io Client Side
+
+Okay we have just started server-side socket.io, how about client side?
+
+We need to get socket.io.js script on our client side. I assume you have made a view.
+
+Where’s Socket.io.js? Its in your
+node_modules/socket.io/node_modules/socket.io-client/
+
+Copy the socket.io.js to your public folder, place it inside assets/js(if you dont have the folder, make one)
+
+View
+
+Here’s what my view looks like, i have included jquery in my layout blade file : app.
+
+@extends('app')
+
+@section('content')
+    <p id="power">0</p>
+@stop
+
+@section('scripts')
+
+    <script src="{{ asset('assets/js/socket.io.js') }}"></script>
+
+    <script>
+    var socket = io('http://localhost:3000');
+    socket.on("test-channel:App\\Events\\MyEventNameHere", function(message){
+         // increase the power everytime we load test route
+         $('#power').text(parseInt($('#power').text()) + parseInt(message.data.power));
+     });
+    </script>
+
+
+@stop
+As you can see I linked the socket.io.js and made a script to listen for the event broadcast, then increase the power counter.
+
+That’s all, try opening up test route in a tab and your main view in another tab, keep on refreshing test route and see the power going up. My power is already over 9000.
+
+Conclusion
+
+This is a great feature to be added to the-already-amazing Laravel framework. Many people will love this.
+This feature can be used to make real-time applications like chatbox and live notifications.
+
+Why I didn’t chose pusher?
+Its not really free if your user base is huge and theres slight http latency since the we still need to call up pusher service. So running redis locally side by side with the app is my favourite way.
+
+Special thanks to Taylor Otwell for creating such a beautiful framework.

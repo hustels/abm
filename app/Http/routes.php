@@ -14,10 +14,11 @@ use App\Events\UserHasRegistred;
 Route::get('/',["middleware" =>"auth" , "uses" => 'mainController@home']);
 Route::get('reports',['middleware' => 'auth', 'uses' =>  'mainController@index']);// si esta autenticado no puede acceder
 Route::get('reports/create', ["middleware" => "auth" , "uses" => 'mainController@create']);// si esta autenticado no puede acceder
+Route::get('reports/show/{id}',["middleware" =>"auth" , "uses" => 'mainController@show']);
 Route::post('reports/store', 'mainController@store');
 Route::get('reports/destroy/{id}' , 'mainController@destroy');
 
-Route::get('home', 'HomeController@index');
+
 
 
 Route::controllers([
@@ -39,10 +40,15 @@ get('/difusion' , function(){
 	return view('pages.events');
 });
 
-// Difundir
+/*// Difundir
 get('difundir'  , function(){
 	//Creamos el evento a difundir
 	event(new UserHasRegistred('Cheikh Ndiaye'));
+});*/
+
+post('reports'  , function(){
+	//App\Message::create($data);
+	return 'hello';
 });
 
 

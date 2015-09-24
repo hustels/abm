@@ -9,6 +9,7 @@ redis.subscribe('user_create_report_chanel', function(err, count) {
 });
 
 redis.on('message', function(channel, message) {
+	//message = 'Sobreescrito';
    console.log('Message Recieved: ' + message);
 
     message = JSON.parse(message);

@@ -50,7 +50,7 @@
 	        columns: [
 	            { data: 'sm_num', name: 'sm_num' },
 	            { data: 'link', name: 'link' },
-	            { data: 'date', name: 'date' },
+	            { data: 'created_at', name: 'created_at' },
 	            { data: 'employer_id', name: 'employer_id' },
 	            { data: 'group', name: 'group' },
 	            { data: 'application', name: 'application' },

@@ -25,7 +25,6 @@ class StoreReportRequest extends Request {
 		return [
 			'sm_num' => 'required|min:5',
 			'link' => "required",
-			'date' =>'required|date',
 			'application' => 'required',
 			'employer_id' => 'required',
 			'group'  => 'required'

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
 	
 	<br><br>
 		<h1>Crear nuevo reporte</h1>
@@ -15,11 +15,6 @@
                 	<label for="link">Link de incidencia</label>
                 	<input type="text" class="form-control" id="link" name="link">
                 </div>
-
-              <div class="form-group">
-                <label for="fecha">Fecha</label>
-                <input type="date" class="form-control" id="fecha" name="date" >
-              </div>
               <div class="form-group">
                 <label for="application">Aplicación</label><br>
                   <select id="apps" class="form-control" name="application">
@@ -48,7 +43,6 @@
               @endforeach
           </ul>
         @endif
-
 
 
 
