@@ -15,7 +15,7 @@ class Report extends Model {
 		'updated_at'
 	];
 
-	public function setCreated_atAttribute($date){
+	public function getCreated_atAttribute($date){
 		$this->attributes['created_at']=Carbon::createFromFormat('d-m-y' , $date);
 	}
 	// Un report es creado por un usuario relationship

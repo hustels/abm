@@ -25,7 +25,7 @@
     var ctx = document.getElementById("myChart").getContext("2d");
     var chart=  {
     	//labels: ["Enero" , "Febrero" , "Marzo"],
-        labels: {!! json_encode($report) !!}, // Funciona de maravilla menudo problemas me ha dado :(
+        labels: {!! json_encode($dates) !!}, // Funciona de maravilla menudo problemas me ha dado :(
     	datasets: [{
     		data: [100,500,40] ,
     		bezierCurve : true, 

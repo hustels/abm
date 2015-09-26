@@ -22,15 +22,16 @@ class mainController extends Controller {
 	public function home(Peticion $request)
 	{
 		$usuario_autenticado = $request->user();
-		//$reports  = Report::all(); 
+		//$graph_data = Report::all(); 
+		$graph_data = Report::find(1);
 		$reports = \DB::table('reports')
                 ->orderBy('created_at', 'desc')
                 ->get();
-		//$report = $reports->lists("created_at");
-          $report = [2015 , 2016,2017];
-
-		return  view('pages.home' , compact('usuario_autenticado' , 'data' , 'reports') );
-
+         //$report = $graph_data->lists('created_at');
+       
+       
+		//return  view('pages.home' , compact('usuario_autenticado' , 'data' , 'reports' ,'report') );
+        return view('pages.home' , compact('reports'))->with('dates' , $graph_data->lists('created_at'));
 		
 	}
 	public function index() //  el method se llamaba getIndex
