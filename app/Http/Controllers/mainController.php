@@ -39,9 +39,13 @@ class mainController extends Controller {
     	
     	// Crear un event and pass data to UserCreateReport event
 		
-		
+		$vue = Report::all();
         return view('pages.index');
+
         
+    }
+    public function vueGetRequest(){
+    	return Report::all();
     }
 
     /**
@@ -49,10 +53,7 @@ class mainController extends Controller {
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function anyData()
-    {
-        return Datatables::of(Report::select('*'))->make(true);
-    }
+  
 
 	/**
 	 * Show the form for creating a new resource.

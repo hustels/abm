@@ -1,76 +1,44 @@
+{{-- Scripts vuejs --}}
+
+
+
 @extends('report_layout')
 
 @section('content')
- <!-- Datatables CSS -->
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="/TableTools/css/dataTables.tableTools.min.css">
-<script src="/libs/jquery/jquery-1.11.3.js"></script>
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="/TableTools/js/dataTables.tableTools.min.js"></script>
-<script type="text/javascript" src="/js/socket.io.js"></script>
-
+	<link rel="stylesheet" type="text/css" href="/js/vue/app.css">
+	<div id="table-report">
+	<input v-model="search" class="form-control"  >
+		<table class="table table-hover">
+		<thead>
+			<tr >
+			
+			<th ><a  v-class="active: ordenarpor=='sm_num'" v-on="click: sortBy('sm_num') ">#Peticion</a></th>
+			<th ><a v-class="active: ordenarpor=='link'"  v-on="click: sortBy('link') ">Link</a></th>
+			<th ><a  v-class="active: ordenarpor=='employer_id'" v-on="click: sortBy('employer_id') ">Usuario</a></th>
+			<th ><a  v-class="active: ordenarpor=='group'" v-on="click: sortBy('group') ">Grupo</a></th>
+			<th ><a v-class="active: ordenarpor=='application'"  v-on="click: sortBy('application') ">Aplicacion</a></th>
+			<th ><a  v-class="active: ordenarpor=='created_at'" v-on="click: sortBy('created_at') ">Fecha</a></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr v-repeat="reports |filterBy search| orderBy ordenarpor reverso">
+				<td>@{{ sm_num}}</td>
+				<td>@{{ link}}</td>
+				<td>@{{employer_id }}</td>
+				<td>@{{ group}}</td>
+				<td>@{{ application}}</td>
+				<td>@{{ created_at}}</td>
+				
+			</tr>
+		</tbody>
+	</table>
 	
-	<br><br>
-		
-		<table class="table table-bordered" id="users-table">
-        <thead>
-            <tr>
-            	
-                <th>Incidencia</th>
-                <th>Link</th>
-                <th>Fecha</th>
-                <th>Empleado</th>
-                <th>Grupo</th>
-                <th>Application</th>
-            </tr>
-        </thead>
-    </table>
-      <script>
-      		//La parte de cliente de socket.io
-		    var socket = io('http://localhost:3000');
-		    socket.on("user_create_report_chanel:App\\Events\\UserCreateReport", function(message){
-		         console.log(message);
-		     });
-    </script>
+
+	<pre>@{{$data | json}}</pre>
+	</div>
 
 
-    <script>
-    $.fn.dataTable.TableTools.defaults.aButtons = [ "copy", "csv", "xls" ];
-	$(function() {
-		
-	    $('#users-table').DataTable({
-	  
-	        processing: true,
-	        serverSide: true,
-	          	"dom": 'T<"clear">lfrtip',
-        "tableTools": {
-            "sSwfPath": "/TableTools/swf/copy_csv_xls_pdf.swf"
-        },
-	        ajax: '{!! route('datatables.data') !!}',
-	        columns: [
-	            { data: 'sm_num', name: 'sm_num' },
-	            { data: 'link', name: 'link' },
-	            { data: 'created_at', name: 'created_at' },
-	            { data: 'employer_id', name: 'employer_id' },
-	            { data: 'group', name: 'group' },
-	            { data: 'application', name: 'application' },
-	        ],
-	        // Idioma
-	        "oLanguage": {
-                "sZeroRecords": "No hay registros",
-                "sEmptyTable": "No hay datos en la tabla",
-                "sLoadingRecords": "Cargando datos...",
-                "sInfo": "Mostrando _TOTAL_ entradas (_START_ de _END_)",
-                "sLengthMenu": "Mostrar _MENU_ entrdas",
-                "sSearch": "Buscar:",
-                        }
-	    });
-	});
-
-	$(document).ready(function(){
-
-	});
-	</script>
-
-	
+<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js"></script>
+<script type="text/javascript" src="/js/vue/vue-resource.js"></script>
+<script type="text/javascript" src="/js/vue/app.js"></script>
 @stop

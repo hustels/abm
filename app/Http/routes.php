@@ -17,7 +17,7 @@ Route::get('reports/create', ["middleware" => "auth" , "uses" => 'mainController
 Route::get('reports/show/{id}',["middleware" =>"auth" , "uses" => 'mainController@show']);
 Route::post('reports/store', 'mainController@store');
 Route::get('reports/destroy/{id}' , 'mainController@destroy');
-
+Route::get('reports/vueGetRequest',["middleware" =>"auth" , "uses" => 'mainController@vueGetRequest']);
 
 
 
@@ -28,10 +28,7 @@ Route::controllers([
 
 
 
-Route::controller('reports/altas', 'mainController', [
-    'anyData'  => 'datatables.data',
-    'getIndex' => 'datatables',
-]);
+
 
 
 // Donde vemos si broadcast es exitoso

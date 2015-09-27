@@ -1,0 +1,11 @@
+#table-report a {
+	font-weight: normal;
+	color: blue;
+	font-weight: bold;
+	text-decoration: none;
+	margin: 1em  0;
+}
+#table-report a.active {
+	font-weight: bold;
+	color: black;
+}

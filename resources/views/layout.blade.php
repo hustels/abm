@@ -164,6 +164,7 @@
 
             <!-- /.row -->
             <div class="row">
+            @yield('chart')
                 <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -186,10 +187,10 @@
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
 
-                    <div class="panel panel-default"> beginnotification
+                    <div class="panel panel-default"> 
 
                         <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Notifications Panel
+                            <i class="fa fa-bell fa-fw"></i> Notificationes
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body" id="notification-panel">
@@ -216,7 +217,7 @@
                         
                         </div>
                         <!-- /.panel-body -->
-                    </div> -->endnotification
+                    </div>
                     <!-- /.panel -->
 
                     <!--<div class="chat-panel panel panel-default"> beginchat 
@@ -300,7 +301,7 @@
     <!-- /#wrapper -->
 
     <!-- Jquery  -->
-    @yield('datatables')
+    
     <script src="/libs/jquery/jquery-1.11.3.js"></script>
     <!-- Datatables js -->
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
